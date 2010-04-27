@@ -1,0 +1,28 @@
+# -*- ruby -*-
+
+require 'rubygems'
+require 'rake/extensiontask'
+require 'spec/rake/spectask'
+require 'hoe'
+
+Hoe.spec 'bigfloat' do
+  developer('Kenta Murata', 'mrkn@mrkn.jp')
+  self.readme_file = 'README.rdoc'
+  self.history_file = 'CHANGES.rdoc'
+  self.extra_rdoc_files = FileList['*.rdoc']
+  self.extra_dev_deps << ['rake-compiler', '>= 0']
+  self.spec_extras = { extensions: %w(ext/bigfloat/extconf.rb) }
+
+  Rake::ExtensionTask.new('bigfloat', spec) do |ext|
+    ext.lib_dir = File.join('lib', 'bigfloat')
+  end
+end
+
+Spec::Rake::SpecTask.new do |t|
+  t.libs << File.expand_path('../lib', __FILE__)
+  t.libs << File.expand_path('../spec', __FILE__)
+  t.warning = true
+end
+Rake::Task[:spec].prerequisites << :compile
+
+# vim: syntax=ruby

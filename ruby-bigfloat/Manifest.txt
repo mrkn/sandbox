@@ -1,0 +1,9 @@
+.autotest
+CHANGES.rdoc
+Manifest.txt
+README.rdoc
+Rakefile
+ext/bigfloat/extconf.rb
+ext/bigfloat/bigfloat.c
+lib/bigfloat.rb
+spec/spec_helper.rb
