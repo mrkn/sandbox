@@ -7,7 +7,7 @@ while line = gets
 
   a, b, c = line.split(/\t/)
   begin
-    puts "#{a} /#{b}/".encode("EUC-JP-ms")
+    puts "#{a} /#{b}/".encode("UTF-8")
   rescue
   end
 end
