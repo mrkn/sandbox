@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="ja" xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Koch Snowfreaks</title>
+    <style>
+      body {
+        background: #000;
+        margin: 0;
+        padding: 0;
+        border: none;
+      }
+      canvas {
+        background: #fff;
+        margin: 0;
+        padding: 0;
+        border: none;
+      }
+    </style>
+  </head>
+  <body>
+    <canvas id="canvas" width="600" height="600"></canvas>
+    <script>
+      window.addEventListener('load', function () {
+        var ww = window.innerWidth
+        var wh = window.innerHeight
+        var w = ww
+        if (ww > wh) w = window.innerHeight
+        w -= 32
+
+        var c = document.getElementById("canvas")
+        c.width = c.height = w
+
+        var mh = (ww - w) / 2
+        c.style.marginLeft = ''+mh+'px'
+        var mv = (wh - w) / 2
+        c.style.marginTop = ''+mv+'px'
+
+        var maxLevel = 6
+        var level = 0
+        function draw() {
+          var ctx = c.getContext('2d')
+          ctx.save()
+
+          var lw = ctx.lineWidth
+          ctx.scale(w, w)
+          ctx.clearRect(0, 0, 1, 1)
+
+          var s = 3.0 / 2.0 / Math.sqrt(3)
+          ctx.scale(s, s)
+          ctx.lineWidth = lw / (w*s)
+
+          ctx.beginPath()
+          ctx.translate(0.5/s, 0)
+          ctx.moveTo(0, 0)
+
+          function addKochCurve(current_level) {
+            if (current_level == 0) {
+              ctx.lineTo(1, 0)
+            }
+            else {
+              ctx.save()
+              ctx.scale(1/3.0, 1/3.0)
+              addKochCurve(current_level-1)
+              ctx.rotate(-Math.PI/3.0)
+              addKochCurve(current_level-1)
+              ctx.rotate(2*Math.PI/3.0)
+              addKochCurve(current_level-1)
+              ctx.rotate(-Math.PI/3.0)
+              addKochCurve(current_level-1)
+              ctx.restore()
+            }
+            ctx.translate(1, 0)
+          }
+
+          ctx.rotate(Math.PI/3.0)
+          addKochCurve(level)
+
+          ctx.rotate(2*Math.PI/3.0)
+          addKochCurve(level)
+
+          ctx.rotate(2*Math.PI/3.0)
+          addKochCurve(level)
+
+          ctx.closePath()
+          ctx.stroke()
+          ctx.restore()
+
+          if (++level >= maxLevel) level = 0
+          setTimeout(draw, 1000)
+        }
+        draw()
+      }, false)
+    </script>
+  </body>
+</html>
