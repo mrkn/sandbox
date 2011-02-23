@@ -35,7 +35,7 @@
           var args = [];
           var source = source_text.value;
           if (source == "") return false;
-          args.push("chl=" + escape(source));
+          args.push("chl=" + encodeURIComponent(source));
 
           var width = width_text.value;
           var height = height_text.value;
