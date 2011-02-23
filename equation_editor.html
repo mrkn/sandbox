@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="ja" xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Equation Editor</title>
+  </head>
+  <body>
+    <form action="javascript:void(0);">
+      <div><textarea id="source" cols="40" rows="5"></textarea></div>
+      <div><input type="text" id="width" />&nbsp;x&nbsp;<input type="text" id="height" /></div>
+      <div><input type="submit" id="submit" /></div>
+    </form>
+    <div id="url"></div>
+    <div id="image"></div>
+    <script>
+      Array.prototype.join = function (str) {
+        if (this.length == 0) return "";
+        if (this.length == 1) return this[0].toString();
+        var joined = this[0].toString();
+        for (var i = 1; i < this.length; ++i) {
+          joined += str + this[i].toString();
+        }
+        return joined;
+      }
+
+      window.addEventListener('load', function () {
+        var source_text = document.getElementById('source');
+        var width_text = document.getElementById('width');
+        var height_text = document.getElementById('height');
+        var submit_button = document.getElementById('submit');
+        var url_container = document.getElementById('url');
+        var image_container = document.getElementById('image');
+
+        submit_button.addEventListener('click', function () {
+          var args = [];
+          var source = source_text.value;
+          if (source == "") return false;
+          args.push("chl=" + escape(source));
+
+          var width = width_text.value;
+          var height = height_text.value;
+          if (width != "" && height != "") {
+            args.push("chs=" + width + "x" + height);
+          }
+
+          var url = 'https://chart.googleapis.com/chart?cht=tx&' + args.join('&');
+          url_container.innerText = url;
+          image_container.innerHTML = '<img onload="javascript:updated(this);" src="' + url + '" />';
+        }, false);
+      }, false)
+
+      function updated(image) {
+        var width_text = document.getElementById('width');
+        var height_text = document.getElementById('height');
+        width_text.value = image.width.toString();
+        height_text.value = image.height.toString();
+      }
+    </script>
+  </body>
+</html>
