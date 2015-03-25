@@ -40,6 +40,8 @@ while url
     next_page_link = session.find('li.zg_page.zg_selected + li.zg_page a') rescue nil
     url = next_page_link && next_page_link['href']
   end
+
+  sleep 1
 end
 
 puts JSON.pretty_generate(entries)
