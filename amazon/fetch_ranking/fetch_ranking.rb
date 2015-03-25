@@ -13,7 +13,7 @@ session = Capybara::Session.new(:poltergeist)
 entries = []
 
 while url
-  puts url
+  $stderr.puts url
   session.visit(url)
 
   session.within('#zg_left_colleft') do
