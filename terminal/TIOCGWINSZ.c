@@ -3,6 +3,6 @@
 
 int
 main(void) {
-  printf("0x%lx\n", TIOCGWINSZ);
+  printf("0x%lx\n", (unsigned long)TIOCGWINSZ);
   return 0;
 }
