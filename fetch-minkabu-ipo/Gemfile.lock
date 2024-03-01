@@ -1,0 +1,21 @@
+GEM
+  remote: https://rubygems.org/
+  specs:
+    concurrent-ruby (1.2.3)
+    mime-types (3.5.2)
+      mime-types-data (~> 3.2015)
+    mime-types-data (3.2024.0206)
+    playwright-ruby-client (1.41.1)
+      concurrent-ruby (>= 1.1.6)
+      mime-types (>= 3.0)
+    rake (13.1.0)
+
+PLATFORMS
+  arm64-darwin-21
+
+DEPENDENCIES
+  playwright-ruby-client
+  rake
+
+BUNDLED WITH
+   2.4.0.dev

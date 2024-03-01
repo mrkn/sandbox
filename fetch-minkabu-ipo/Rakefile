@@ -1,0 +1,8 @@
+task :setup => :install_playwright
+
+task :install_playwright => "./node_modules/.bin/playwright"
+
+file "./node_modules/.bin/playwright" do
+  sh "npm install playwright"
+  sh "./node_modules/.bin/playwright install"
+end
