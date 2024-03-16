@@ -4,6 +4,9 @@ require "playwright"
 require "set"
 require "time"
 
+# TODO:
+# - [ ] Check pre-IPO stock
+
 Stock = Struct.new(
   :code,
   :market,
